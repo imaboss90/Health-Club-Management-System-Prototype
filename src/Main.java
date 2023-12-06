@@ -1,23 +1,22 @@
-import java.util.*;
+import com.example.Database.Database;
+import com.example.MemberSignUp.MemberSignUp;
+import java.util.UUID;
 
-class Main {
+public class Main {
   public static void main(String[] args) {
+    // Create a database instance
     Database database = new Database();
+
+    // Populate the database with initial data
     database.populate();
-    
+
+    // Create an instance of MemberSignUp
     MemberSignUp signUp = new MemberSignUp(database);
+
+    // Perform sign-up operations
     signUp.form();
-    
-    Manager honig = new Manager("Honig",String.valueOf( UUID.randomUUID()),"whonig@outlook.com","javaIsTerrible");
-    database.addManager(honig);
-    
-    ManagerLogin ml = new ManagerLogin(database);
-    ml.validate("whonig@outlook.com","javaIsTerrible");
-    
-    DataFilters df = new DataFilters(database);
-    System.out.println(df.ThirtyDaysFilter());
-    
-    System.out.println();
+
+    // Print the updated database
     System.out.println(database);
   }
 }

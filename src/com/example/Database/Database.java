@@ -1,62 +1,59 @@
-import java.util.*;
+package com.example.Database;
 
-public class Database 
-{
-    HashMap<User, String> database;
-    boolean loggedIn = false;
-    
-    public Database()
-    { 
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import com.example.Member.Member;
+import com.example.User.User;
+
+public class Database {
+    private HashMap<User, String> database;
+    private boolean loggedIn = false;
+
+    public Database() {
         this.database = new HashMap<>();
     }
 
-    public void populate()
-    {
-        Member iman = new Member(19,"Iman",String.valueOf( UUID.randomUUID()),"Visa","2023-11-05",String.valueOf( UUID.randomUUID()),"isafari@outlook.com","2023-08-04");
-        Member zarak = new Member(25,"Zarak",String.valueOf( UUID.randomUUID()),"Chase","2023-12-04",String.valueOf( UUID.randomUUID()),"zaraktariq@outlook.com","2023-07-04");
-          database.put(iman,"Member");
-          database.put(zarak,"Member");
-      }
-
-    public void addMember(Member newMember)
-    {
-      database.put(newMember,"Member");
+    public void populate() {
+        Member iman = new Member(19, "Iman", String.valueOf(UUID.randomUUID()), "Visa", "2023-11-05", String.valueOf(UUID.randomUUID()), "isafari@outlook.com", "2023-08-04");
+        Member zarak = new Member(25, "Zarak", String.valueOf(UUID.randomUUID()), "Chase", "2023-12-04", String.valueOf(UUID.randomUUID()), "zaraktariq@outlook.com", "2023-07-04");
+        database.put(iman, "Member");
+        database.put(zarak, "Member");
     }
 
-    public void addManager(Manager newManager)
-    {
-      database.put(newManager,"Manager");
-    }
-
-    public User getMember(String memberEmail)
-    {
-      for(User entry : database.keySet())
-      {
-        if(entry.getEmail().equals(memberEmail))
-        {
-          return entry;
+    // Implement the getMember method
+    public User getMember(String email) {
+        for (User user : database.keySet()) {
+            if (user instanceof Member && user.getEmail().equals(email)) {
+                return user;
+            }
         }
-      }
-      return null;
-    } 
+        return null; // Member not found
+    }
 
+    // Implement the addMember method
+    public void addMember(Member member) {
+        database.put(member, "Member");
+    }
+
+    // Other methods...
+
+    @Override
     public String toString() {
-      String entries = "";
-      for(User entry : database.keySet())
-      {
-          entries+=entry.toString()+"\n\n";
-      }
-      return entries;
+        StringBuilder entries = new StringBuilder();
+        for (User entry : database.keySet()) {
+            entries.append(entry.toString()).append("\n\n");
+        }
+        return entries.toString();
     }
 
-    public List<User> getEntries()
-    {
-      List<User> memberList = new ArrayList<>(database.keySet());
-      return memberList;
+    public List<User> getEntries() {
+        return new ArrayList<>(database.keySet());
     }
 
-    public void setLoggedInTrue()
-    {
-      loggedIn = true;
+    public void setLoggedInTrue() {
+        loggedIn = true;
     }
 }

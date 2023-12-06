@@ -1,3 +1,5 @@
+package com.example.Member;
+import com.example.User.User;
 public class Member extends User
 {
     int memberAge;

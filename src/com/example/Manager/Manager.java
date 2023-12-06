@@ -1,3 +1,5 @@
+package com.example.Manager;
+import com.example.User.User;
 public class Manager extends User
 {
     String managerName;

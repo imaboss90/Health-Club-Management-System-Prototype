@@ -1,4 +1,7 @@
+package com.example.PasswordRecovery;
 import java.util.*;
+import java.util.UUID;
+import com.example.Manager.Manager;
 
 public class PasswordRecovery
 {
