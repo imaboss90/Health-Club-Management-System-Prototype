@@ -2,44 +2,61 @@ import java.util.*;
 
 public class Database 
 {
-    List<Member> database;
-
+    HashMap<User, String> database;
+    boolean loggedIn = false;
+    
     public Database()
-    {
-        this.database = new ArrayList<>();
+    { 
+        this.database = new HashMap<>();
     }
 
     public void populate()
     {
-      Member iman = new Member(19,"Iman","123","Visa","10/28/23","456","isafari@outlook.com","12/05/23");
-      Member zarak = new Member(25,"Zarak","6238","Chase","9/14/18","484","zaraktariq@outlook.com","11/27/23");
-        database.add(iman);
-        database.add(zarak);
+        Member iman = new Member(19,"Iman",String.valueOf( UUID.randomUUID()),"Visa","2023-11-05",String.valueOf( UUID.randomUUID()),"isafari@outlook.com","2023-08-04");
+        Member zarak = new Member(25,"Zarak",String.valueOf( UUID.randomUUID()),"Chase","2023-12-04",String.valueOf( UUID.randomUUID()),"zaraktariq@outlook.com","2023-07-04");
+          database.put(iman,"Member");
+          database.put(zarak,"Member");
       }
 
     public void addMember(Member newMember)
     {
-      database.add(newMember);
+      database.put(newMember,"Member");
     }
 
-    public Member getMember(String memberName)
+    public void addManager(Manager newManager)
     {
-      for(Member entry : database)
+      database.put(newManager,"Manager");
+    }
+
+    public User getMember(String memberEmail)
+    {
+      for(User entry : database.keySet())
       {
-        if(entry.getMemberName().equals(memberName))
+        if(entry.getEmail().equals(memberEmail))
         {
           return entry;
         }
       }
       return null;
-    }
+    } 
 
     public String toString() {
       String entries = "";
-      for(Member entry : database)
+      for(User entry : database.keySet())
       {
-        entries+=entry.toString()+"\n\n";
+          entries+=entry.toString()+"\n\n";
       }
       return entries;
+    }
+
+    public List<User> getEntries()
+    {
+      List<User> memberList = new ArrayList<>(database.keySet());
+      return memberList;
+    }
+
+    public void setLoggedInTrue()
+    {
+      loggedIn = true;
     }
 }

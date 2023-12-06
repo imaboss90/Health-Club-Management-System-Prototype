@@ -3,15 +3,16 @@ import java.time.*;
 
 public class MemberSignUp
 {
-    Database database;
+    Database database; 
     public MemberSignUp(Database database)
     {
       this.database = database;
-    }
+    } 
     public void form()
     {
 
       int memberAge = 0;
+      int months = 0;
       String memberName = "";
       String memberId = "";
       String paymentMethod = "";
@@ -19,12 +20,14 @@ public class MemberSignUp
       String qrCodeId = "";
       String memberEmail = "";
       String expirationDate = "";
+      
 
       boolean validated = false;
       
-      Scanner scan = new Scanner(System.in);
+      Scanner scan = new Scanner(System.in).useDelimiter("\n");
       while(!validated)
       {
+        
         System.out.println("Enter your name: ");
         memberName = scan.next();
         System.out.println("Enter your age: ");
@@ -33,9 +36,11 @@ public class MemberSignUp
         paymentMethod = scan.next();
         System.out.println("Enter your email: ");
         memberEmail = scan.next();
-        validated = validateFields(memberName,memberAge,paymentMethod,memberEmail);
+        System.out.println("Enter the number of months you would like to pay for your membership (from 6 to 36): ");
+        months = scan.nextInt();
+        validated = validateFields(memberName,memberAge,paymentMethod,memberEmail,months);
       }
-      expirationDate = calculateEndDate();
+      expirationDate = calculateEndDate(months);
       lastSignIn = String.valueOf(LocalDate.now());
       List<String> ids = createIDandQR();
       memberId = ids.get(0);
@@ -45,17 +50,16 @@ public class MemberSignUp
       System.out.println("All signed up!");
     } 
   
-    public String calculateEndDate()
+    public String calculateEndDate(int months)
     {
       LocalDate today = LocalDate.now();
-      LocalDate nextMonth = today.plusDays(30);
-      System.out.println(nextMonth);
-      return String.valueOf(nextMonth);
+      LocalDate endDate = today.plusMonths(months);
+      return String.valueOf(endDate);
     }
 
-    public boolean validateFields(String name, int age, String pay, String email)
+    public boolean validateFields(String name, int age, String pay, String email, int months)
     {
-      if(name.equals("") || age==0 || pay.equals("") || email.equals(""))
+      if(name.equals("") || age==0 || pay.equals("") || email.equals("") || months==0)
       {
         return false;
       }

@@ -1,30 +1,32 @@
-import java.time.LocalDate;
+import java.time.*;
 import java.util.*;
+import java.time.temporal.ChronoUnit;
 
 public class DataFilters{
 
     Database database;
-
+ 
     public DataFilters(Database database)
     {
         this.database = database;
     }
 
-    public List<Member> ThirtyDaysFilter()
+    public List<User> ThirtyDaysFilter()
     {
-        List<Member> memberList = new ArrayList<>();
-        List<Member> entries = database.getEntries();
+        List<User> memberList = new ArrayList<>();
+        List<User> entries = database.getEntries();
         LocalDate today = LocalDate.now();
-        LocalDate thirtyDaysAgo = today.minusDays(30);
-        System.out.println(thirtyDaysAgo);
-        for(Member entry : entries)
+        for(User entry : entries)
         {
-            String lastLogin = entry.getLastSignIn();
-            System.out.println(lastLogin);
-            if (lastLogin.equals(String.valueOf(thirtyDaysAgo))) 
+            if(entry instanceof Member)
             {
+              LocalDate lastLocalDateLogin = LocalDate.parse(entry.getLastSignIn());
+              long days = ChronoUnit.DAYS.between(lastLocalDateLogin, today);
+              if(days>=30)
+              {
                 memberList.add(entry);
-            } 
+              }
+            }
         }
         return memberList;
     }

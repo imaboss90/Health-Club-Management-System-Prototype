@@ -1,4 +1,4 @@
-public class Member 
+public class Member extends User
 {
     int memberAge;
     String memberName;
@@ -12,7 +12,7 @@ public class Member
 
     public Member(int memberAge, String memberName, String memberId, String paymentMethod, String lastSignIn, String qrCodeId, String memberEmail, String expirationDate)
     {
-        this.memberAge = memberAge;
+        this.memberAge = memberAge; 
         this.memberName = memberName;
         this.memberId = memberId;
         this.paymentMethod = paymentMethod;
@@ -24,10 +24,10 @@ public class Member
 
     public String toString()
     {
-      String profile = "Member Name: "+memberName+"\nMember Age: "+memberAge+"\nMember ID: "+memberId+"\nPayment Method: "+paymentMethod+"\nLast Sign In: "+lastSignIn+"\nQR Code ID: "+qrCodeId+"\nMember Email: "+memberEmail+"\nExpiration Date"+expirationDate;
+      String profile = "Member Name: "+memberName+"\nMember Age: "+memberAge+"\nMember ID: "+memberId+"\nPayment Method: "+paymentMethod+"\nLast Sign In: "+lastSignIn+"\nQR Code ID: "+qrCodeId+"\nMember Email: "+memberEmail+"\nExpiration Date: "+expirationDate;
       return profile;
     }
-
+  
     public int getMemberAge() { return memberAge; }
   
     public String getMemberName() { return memberName; }
@@ -40,8 +40,7 @@ public class Member
   
     public String getQrCodeId() { return qrCodeId; }
   
-    public String getMemberEmail() { return memberEmail; }
+    public String getEmail() { return memberEmail; }
   
-    public String getExpirationEmail() { return expirationDate; }
-
+    public String getExpirationDate() { return expirationDate; }
 }
