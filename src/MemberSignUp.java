@@ -24,7 +24,7 @@ public class MemberSignUp
 
       boolean validated = false;
       
-      Scanner scan = new Scanner(System.in).useDelimiter("\n");
+      Scanner scan = new Scanner(System.in);
       while(!validated)
       {
         
@@ -32,12 +32,14 @@ public class MemberSignUp
         memberName = scan.next();
         System.out.println("Enter your age: ");
         memberAge = scan.nextInt();
+ 
+
         System.out.println("Enter your payment method: ");
         paymentMethod = scan.next();
         System.out.println("Enter your email: ");
         memberEmail = scan.next();
         System.out.println("Enter the number of months you would like to pay for your membership (from 6 to 36): ");
-        months = scan.nextInt();
+        months = scan.nextInt(); 
         validated = validateFields(memberName,memberAge,paymentMethod,memberEmail,months);
       }
       expirationDate = calculateEndDate(months);
@@ -45,7 +47,7 @@ public class MemberSignUp
       List<String> ids = createIDandQR();
       memberId = ids.get(0);
       qrCodeId = ids.get(1);
-      scan.close();
+      
       inputIntoDatabase(memberAge,memberName,memberId,paymentMethod,lastSignIn,qrCodeId,memberEmail,expirationDate);
       System.out.println("All signed up!");
     } 
@@ -78,7 +80,7 @@ public class MemberSignUp
 
     public void inputIntoDatabase(int memberAge,String memberName,String memberId,String paymentMethod,String lastSignIn,String qrCodeId,String memberEmail,String expirationDate)
     {
-      Member newMember = new Member(memberAge,memberName,memberId,paymentMethod,lastSignIn,qrCodeId,memberEmail,expirationDate);
+      Member newMember = new Member(memberName, memberAge, memberId, paymentMethod, lastSignIn, qrCodeId, memberEmail, expirationDate);
       database.addMember(newMember);
     }
 

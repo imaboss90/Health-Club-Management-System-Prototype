@@ -2,7 +2,7 @@ import java.util.*;
 
 public class PasswordRecovery
 {
-  Manager manager;
+  Manager manager; 
   public PasswordRecovery(Manager manager)
   {
     this.manager = manager;
@@ -14,7 +14,7 @@ public class PasswordRecovery
     {
       return true;
     }
-    return false;
+    return false; 
   }
 
   public void setNewPassword(String newPassword)
