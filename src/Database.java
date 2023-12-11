@@ -13,7 +13,7 @@ public class Database {
   }
 
     private void readMemberDatabase() {
-    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Fireb\\IdeaProjects\\SEHealthClub\\src\\MemberDatabase.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("MemberDatabase.txt"))) {
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(",");
@@ -46,7 +46,7 @@ public class Database {
     }
 
     private void readManagerCreds() {
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Fireb\\IdeaProjects\\SEHealthClub\\src\\ManagerCreds.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("ManagerCreds.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
               //System.out.println("Reading line: " + line);
@@ -64,7 +64,7 @@ public class Database {
     }
 
     private void writeMemberDatabase() {
-  try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Fireb\\IdeaProjects\\SEHealthClub\\src\\MemberDatabase.txt"))) {
+  try (BufferedWriter bw = new BufferedWriter(new FileWriter("MemberDatabase.txt"))) {
       for (Member member : members) {
           String line = member.getMemberName() + "," +
                         String.valueOf(member.getMemberAge()) + "," +
@@ -102,7 +102,7 @@ public Member searchMemberByName(String name) {
 }
 
     private void writeManagerCreds() {
-      try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Fireb\\IdeaProjects\\SEHealthClub\\src\\ManagerCreds.txt"))) {
+      try (BufferedWriter bw = new BufferedWriter(new FileWriter("ManagerCreds.txt"))) {
           for (Manager manager : managers) {
               String line = manager.getName() + "," + manager.getUsername() + "," + manager.getPassword() + ","
                             + manager.getEmail() + "," + manager.getAuthenticationKey() + "," + manager.getEmployeeId();

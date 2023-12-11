@@ -78,6 +78,8 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("\nFiltering Members...\n");
+                    DataFilters dataFilters = new DataFilters(database);
+                    dataFilters.thirtyDaysFilter();
                     break;
                 case 0:
                     System.out.println("\nExiting...\n");
